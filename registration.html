@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <title>Созидатели - Регистрация</title>
+    <link rel="stylesheet" href="./styles/stylesRegistr.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section_left">
+            <div class="login_section">
+                <div class="text_form_left">
+                    <h2 class="h2_registr1">Войти в аккаунт</h2>
+                </div>
+                <form onsubmit="validateLogin(event)">
+                    <div class="form_group">
+                        <label for="login">Логин</label>
+                        <input type="text" id="login" name="login" placeholder="+7 943 999 10 10">
+                        <span class="error_message">Пожалуйста, введите логин.</span>
+                    </div>
+                    <div class="form_group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" name="password" placeholder="Введите пароль">
+                        <span class="error_message">Пожалуйста, введите пароль.</span>
+                    </div>
+                    <a href="#" class="forgot_password">Забыли пароль?</a>
+                    <button type="submit" class="btn_login"><span class="text_enter">Войти</span></button>
+                </form>
+                <div id="modal" class="modal">
+                    <div class="modal_content">
+                        <p id="modal_text">Неверный логин или пароль</p>
+                        <span class="close_button">&times;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section_right">
+            <div class="logo_section">
+                <img class="logo_enter" src="./img/logoEnter.svg" alt="logoEnter">
+            </div>
+            <div class="form_registr">
+                <div>
+                    <h2 class="h2_registr">Регистрация</h2>
+                    <div class="form_group">
+                        <label for="phone">Номер телефона</label>
+                        <input type="text" id="phone" name="phone" placeholder="+7 (999) 999-99-99">
+                        <span class="error_message">Пожалуйста, введите корректный номер</span>
+                    </div>
+                    <div class="form_group">
+                        <label for="agency">Агентство</label>
+                        <input type="text" id="agency" name="agency">
+                        <span class="error_message">Пожалуйста, введите название агентства.</span>
+                    </div>
+                    <div class="form_group">
+                        <label for="fio">ФИО</label>
+                        <input type="text" id="fio" name="fio">
+                        <span class="error_message">Пожалуйста, введите ФИО.</span>
+                    </div>
+                    <div class="form_group">
+                        <label for="position">Должность</label>
+                        <input type="text" id="position" name="position">
+                        <span class="error_message">Пожалуйста, введите вашу должность.</span>
+                    </div>
+                    <button type="button" class="btn_registr" onclick="validateRegistration()"><span class="text_btn_registr">Стать партнёром</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const phoneInput = document.getElementById('phone');
+        
+        phoneInput.addEventListener('input', (e) => {
+            let input = e.target.value.replace(/\D/g, '').substring(0, 11);
+            e.target.value = input.length > 1 ? 
+                `+7 (${input.slice(1,4)})${input.length > 4 ? ' ' + input.slice(4,7) : ''}${input.length > 7 ? ' ' + input.slice(7,9) : ''}${input.length > 9 ? '-' + input.slice(9) : ''}` :
+                '+7 ';
+        });
+    });
+
+    function toggleError(input, message = '') {
+        const formGroup = input.parentElement;
+        formGroup.classList.toggle('error', !!message);
+        formGroup.querySelector('.error_message').textContent = message;
+    }
+
+    function validateRegistration() {
+        const fields = ['phone', 'agency', 'fio', 'position'];
+        const messages = {
+            phone: 'Пожалуйста, введите корректный номер',
+            agency: 'Пожалуйста, введите название агентства.',
+            fio: 'Пожалуйста, введите ФИО.',
+            position: 'Пожалуйста, введите вашу должность.'
+        };
+
+        let valid = fields.every(field => {
+            const input = document.getElementById(field);
+            const isValid = field === 'phone' ? 
+                /^\+7 \(\d{3}\) \d{3} \d{2}-\d{2}$/.test(input.value.trim()) :
+                input.value.trim() !== '';
+            toggleError(input, isValid ? '' : messages[field]);
+            return isValid;
+        });
+
+        if (valid) alert('Регистрация успешна!');
+    }
+    </script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

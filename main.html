@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+  <title>Главная страница</title>
+  <link rel="stylesheet" href="./styles/stylesMain.css">
+</head>
+
+<body>
+  <header>
+    <a href="./main.html"><img class="img_main" src="./img/logoMain.svg" alt="Логотип"></a>
+    <div class="header_contacts">
+      <a href="./LK.html"><img class="icon_logo" src="./img/contacts.svg" alt="Phone"></a>
+      <span>+7 999 111 22 33</span>
+      <a href="#"><img class="icon_logo" src="./img/refresh.svg" alt="Refresh"></a>
+      <a href="./index.html"><img class="icon_logo" src="./img/enter.svg" alt="Enter"></a>
+    </div>
+  </header>
+  <section>
+    <div class="filter_container">
+      <div class="text_filter">
+        <h1 class="h1_filter">База переступок</h1>
+      </div>
+      <div>
+        <div class="filters_main">
+          <div>
+            <button class="filter_button filter_button--red"><span class="text_btn_filtr">Срок сдачи</span> <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter"></button>
+            <div class="filter-popup filter_button--red">
+              <input type="text" id="srok-ot" placeholder="От">
+              <input type="text" id="srok-do" placeholder="До">
+            </div>
+          </div>
+          <div>
+            <button class="filter_button filter_button--blue">
+              <span class="text_btn_filtr">Район</span>
+              <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter">
+            </button>
+            <div class="filter-popup filter_button--blue">
+              <div class="checkbocks_main">
+                <div class="checkbox-container">
+                  <input style="margin-left: -26px;" class="checks" type="checkbox" id="rayon-center" name="rayon-center">
+                  <label style="margin-left: -26px;" class="label_check" for="rayon-center">Центр</label>
+                </div>
+                <div class="checkbox-container">
+                  <input style="margin-left: -26px;" class="checks" type="checkbox" id="rayon-north" name="rayon-north">
+                  <label style="margin-left: -26px;" class="label_check" for="rayon-north">Север</label>
+                </div>
+                <div class="checkbox-container">
+                  <input style="margin-left: -26px;" class="checks" type="checkbox" id="rayon-south" name="rayon-south">
+                  <label style="margin-left: -26px;" class="label_check" for="rayon-south">Юг</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="filter_button filter_button--red"><span class="text_btn_filtr">Метро</span> <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter"></button>
+            <div class="filter-popup filter_button--red">
+              <input type="text" id="metro-ot" placeholder="От">
+              <input type="text" id="metro-do" placeholder="До">
+            </div>
+          </div>
+          <div>
+            <button class="filter_button filter_button--orange"><span class="text_btn_filtr">Площадь</span> <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter"></button>
+            <div class="filter-popup filter_button--orange">
+              <input type="text" id="ploshad-ot" placeholder="От">
+              <input type="text" id="ploshad-do" placeholder="До">
+            </div>
+          </div>
+          <div>
+            <button class="filter_button filter_button--berez"><span class="text_btn_filtr">Кухня</span> <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter"></button>
+            <div class="filter-popup filter_button--berez">
+              <input type="text" id="kuhnya-ot" placeholder="От">
+              <input type="text" id="kuhnya-do" placeholder="До">
+            </div>
+          </div>
+          <div>
+            <button class="filter_button filter_button--red"><span class="text_btn_filtr">Цена при 100%</span> <img class="img_strela_vniz" src="./img/filterArrow.svg" alt="arowwFilter"></button>
+            <div class="filter-popup filter_button--red">
+              <input type="text" id="cena-100-ot" placeholder="От">
+              <input type="text" id="cena-100-do" placeholder="До">
+            </div>
+          </div>
+          <button class="filter_button_use" onclick="applyFilters()"><span class="text_btn_filtr1">Применить</span></button>
+          <button class="filter_button_use" id="resetFiltersButton"><span class="text_btn_filtr1">Сбросить</span></button>
+        </div>
+      </div>
+    </div>
+    <hr class="hr_main">
+    <div class="table-container">
+      <table class="property_table" id="propertyTable">
+        <thead>
+          <tr class="table_header">
+            <th class="corner-top-left corner-bottom-left">Фото</th>
+            <th>Адрес</th>
+            <th>Срок сдачи</th>
+            <th>Комиссия</th>
+            <th>Район</th>
+            <th>Метро</th>
+            <th>Площадь</th>
+            <th>Кухня</th>
+            <th>Цена при 100%</th>
+            <th>Кадастр</th>
+            <th>Реклама</th>
+            <th>№</th>
+            <th>м2</th>
+            <th colspan="2"></th>
+            <th>Особ-ти</th>
+            <th class="corner-top-right corner-bottom-right">Подписан ПД№1</th>
+          </tr>
+        </thead>
+        <tbody id="propertyTableBody">
+          <tr class="table_subheader">
+            <td colspan="11"><span class="span_table">СПБ</span></td>
+          </tr>
+          <tr style="cursor: pointer;" class="table_row table_row_blue" onclick="redirectToCard(this)">
+            <td class="corner-top-left"><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+            <td>Чайковского 66 (кадастр до 6кв 2034)(в)</td>
+            <td>4 кв 2024</td>
+            <td>5%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>50 m</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1</td>
+            <td>11,3</td>
+            <td>3 265 700</td>
+            <td>289000</td>
+            <td></td>
+            <td class="corner-top-right">Подписан</td>
+          </tr>
+          <tr style="cursor: pointer;" class="table_row table_row_blue" onclick="redirectToCard(this)">
+            <td><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+            <td>Чайковского 6 (кадастр до 8кв 2027)(в)</td>
+            <td>4 кв 2024</td>
+            <td>5%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>130 m</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1</td>
+            <td>11,3</td>
+            <td>3 265 700</td>
+            <td>289000</td>
+            <td></td>
+            <td>Подписан</td>
+          </tr>
+          <tr style="cursor: pointer;" class="table_row table_row_blue" onclick="redirectToCard(this)">
+            <td class="corner-bottom-left"><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+            <td>Чайковского 60 (кадастр до 6кв 2027)(в)</td>
+            <td>4 кв 2024</td>
+            <td>5%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>450 m</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1</td>
+            <td>11,3</td>
+            <td>3 265 700</td>
+            <td>289000</td>
+            <td></td>
+            <td class="corner-bottom-right">Подписан</td>
+            <tr class="table_subheader">
+              <td colspan="11"><span class="span_table">Адмиралтейский</span></td>
+            </tr>
+            <tr style="cursor: pointer;" class="table_row table_row_red" onclick="redirectToCard(this)">
+              <td class="corner-top-left"><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+              <td>Чайковского 30 (кадастр до 7кв 2024)(в)</td>
+              <td>4 кв 2024</td>
+            <td>5%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>250 m</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1</td>
+            <td>11,3</td>
+            <td>3 265 700</td>
+            <td>289000</td>
+            <td></td>
+              <td class="corner-top-right">Подписан</td>
+            </tr>
+            <tr style="cursor: pointer;" class="table_row table_row_red" onclick="redirectToCard(this)">
+              <td><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+              <td>Чайковского 40 (кадастр до 2кв 2024)(в)</td>
+              <td>4 кв 2024</td>
+              <td>5%</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>180 m</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td>11,3</td>
+              <td>3 265 700</td>
+              <td>289000</td>
+              <td></td>
+              <td>Подписан</td>
+            </tr>
+            <tr style="cursor: pointer;" class="table_row table_row_red" onclick="redirectToCard(this)">
+              <td class="corner-bottom-left"><img class="mini_logo_house" src="./img/home.jpg" alt="photo"></td>
+              <td>Чайковского 50 (кадастр до 2кв 2024)(в)</td>
+              <td>4 кв 2024</td>
+              <td>5%</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>160 m</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td>11,3</td>
+              <td>3 265 700</td>
+              <td>289000</td>
+              <td></td>
+              <td class="corner-bottom-right">Не подписан</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <a href="#" class="active">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <span>..82</span>
+    </div>
+  </section>
+  <footer>
+    <p class="p_footer">Квартир выделенно 2333</p>
+    <p class="p_footer">2020 - 2024 ООО "Созидатели"</p>
+  </footer>
+</body>
+<script src="./js/script.js"></script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+  <title>Главная страница</title>
+  <link rel="stylesheet" href="./styles/stylesMain.css">
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="./main.html"><img class="img_main" src="./img/logoMain.svg" alt="Логотип"></a>
+    <div>
+        <h1 id="houseAddress"></h1>
+    </div>
+    <div class="header_contacts">
+      <a href="./LK.html"><img class="icon_logo" src="./img/contacts.svg" alt="Phone"></a>
+      <span>+7 999 111 22 33</span>
+      <a href="#"><img class="icon_logo" src="./img/refresh.svg" alt="Refresh"></a>
+      <a href="./index.html"><img class="icon_logo" src="./img/enter.svg" alt="Enter"></a>
+    </div>
+  </header>
+  <section>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="./img/1.jpeg" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="./img/2.jpeg" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="./img/3.jpg" alt="Slide 2">
+            </div>
+        </div>
+        <div class="arrow left-arrow"><img src="./img/leftArrow 4.svg" alt=""></div>
+        <div class="arrow right-arrow"><img src="./img/rightArrow 3.svg" alt=""></div>
+      </div>
+  </section>
+  <footer>
+    <p class="p_footer">Квартир выделенно 2333</p>
+    <p class="p_footer">2020 - 2024 ООО "Созидатели"</p>
+  </footer>
+</body>
+<script>
+    // Функция для извлечения параметров из URL
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        address: params.get('address')
+      };
+    }
+
+    // Извлечение параметров и отображение адреса
+    document.addEventListener('DOMContentLoaded', () => {
+      const { address } = getQueryParams();
+      const houseAddressElement = document.getElementById('houseAddress');
+      houseAddressElement.textContent = address || 'Адрес не указан';
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const leftArrow = document.querySelector('.left-arrow');
+    const rightArrow = document.querySelector('.right-arrow');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    // Клонируем первый и последний слайды
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[totalSlides - 1].cloneNode(true);
+
+    // Добавляем клоны в начало и конец слайдера
+    slider.appendChild(firstClone);
+    slider.insertBefore(lastClone, slides[0]);
+
+    // Обновляем стили для правильного отображения
+    slider.style.transform = `translateX(-100%)`;
+
+    function showSlide(index) {
+        let translateValue = -(index + 1) * 100;
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        slider.style.transform = `translateX(${translateValue}%)`;
+    }
+
+    function nextSlide() {
+        currentIndex++;
+        showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+        currentIndex--;
+        showSlide(currentIndex);
+    }
+
+    slider.addEventListener('transitionend', () => {
+        if (currentIndex === -1) {
+            slider.style.transition = 'none';
+            currentIndex = totalSlides - 1;
+            slider.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
+        }
+        if (currentIndex === totalSlides) {
+            slider.style.transition = 'none';
+            currentIndex = 0;
+            slider.style.transform = `translateX(-100%)`;
+        }
+    });
+
+    rightArrow.addEventListener('click', nextSlide);
+    leftArrow.addEventListener('click', prevSlide);
+
+    });
+</script>
+</html>

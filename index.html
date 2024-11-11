@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <title>Созидатели - Вход</title>
+    <link rel="stylesheet" href="./styles/stylesEnter.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section_left">
+            <div class="login_section">
+                <div class="text_form_left">
+                    <p>Гостевой вход:</p>
+                    <p>Логин - 1</p>
+                    <p>Пароль - 1</p>
+                </div>
+                <form onsubmit="validateLogin(event)">
+                    <div class="form_group">
+                        <label for="login">Логин</label>
+                        <input type="text" id="login" name="login" placeholder="Введите логин">
+                    </div>
+                    <div class="form_group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" name="password" placeholder="Введите пароль">
+                    </div>
+                    <a href="#" class="forgot_password">Забыли пароль?</a>
+                    <button type="submit" class="btn_login"><span class="text_enter">Войти</span></button>
+                </form>
+                <div id="modal" class="modal">
+                    <div class="modal_content">
+                        <p id="modal_text">Неверный логин или пароль</p>
+                        <span class="close_button">&times;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section_right">
+            <div class="logo_section">
+                <div class="logo">
+                    <img class="logo_enter" src="./img/logoEnter.svg" alt="logoEnter">
+                </div>
+                <div class="buttons">
+                    <a class="a_enter" href="./registration.html"><button class="btn_partner">Стать партнером</button></a>
+                    <a class="a_enter" href="index.html"><button class="btn_partner">Уже являюсь партнёром</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/script.js"></script>
+</html>

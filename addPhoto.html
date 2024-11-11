@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+  <title>Главная страница</title>
+  <link rel="stylesheet" href="./styles/stylesMain.css">
+  <link rel="stylesheet" href="./styles/addObject.css">
+</head>
+
+<body>
+  <header>
+    <a href="./main.html"><img class="img_main" src="./img/logoMain.svg" alt="Логотип"></a>
+    <div class="header_contacts">
+      <a href="./LK.html"><img class="icon_logo" src="./img/contacts.svg" alt="Phone"></a>
+      <span>+7 999 111 22 33</span>
+      <a href="#"><img class="icon_logo" src="./img/refresh.svg" alt="Refresh"></a>
+      <a href="./index.html"><img class="icon_logo" src="./img/enter.svg" alt="Enter"></a>
+    </div>
+  </header>
+  <section>
+    <div class="form-container">
+        <div class="upload-container" onclick="document.getElementById('fileInput').click();">
+            <input type="file" id="fileInput" accept="image/*">
+            <img id="preview" alt="Preview">
+        </div>
+        <div class="add_obj_btn">
+            <button class="add-photo-btn">Сохранить</button>
+            <a href="./addObject.html"><button class="submit-btn">Вернуться к настройкам объекта</button></a>
+        </div>
+    </div>
+  </section>
+  <footer>
+    <p class="p_footer">Квартир выделенно 2333</p>
+    <p class="p_footer">2020 - 2024 ООО "Созидатели"</p>
+  </footer>
+</body>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('preview');
+                img.src = e.target.result;
+                img.classList.add('displayed');
+                document.querySelector('.upload-container::before').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</html>
